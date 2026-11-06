@@ -1,0 +1,660 @@
+/* =========================
+   MAIN PAGE
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: linear-gradient(
+        to bottom,
+        #4da6ff,
+        #87ceeb,
+        #bdefff
+    );
+    font-family: Arial, sans-serif;
+    color: #222;
+}
+
+h1, h2, h3 {
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    margin: 10px;
+    text-shadow: 2px 2px 5px #333;
+}
+
+h2 {
+    margin: 8px;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+button {
+    margin: 2px;
+    padding: 7px 12px;
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background: #eee;
+    color: #222;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #ccc;
+    transform: scale(1.04);
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+/* =========================
+   PARTS MENU
+========================= */
+
+#parts {
+    position: absolute;
+    left: 10px;
+    top: 70px;
+    width: 220px;
+    background: white;
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 10;
+    box-shadow: 0 4px 10px #555;
+}
+
+#parts h3 {
+    color: black;
+}
+
+#parts button {
+    width: 190px;
+    margin: 3px;
+}
+
+/* =========================
+   ROCKET BUILDER
+========================= */
+
+#builder {
+    position: absolute;
+    left: 50%;
+    top: 120px;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 450px;
+    border: 3px dashed black;
+    background: rgba(255,255,255,0.2);
+    overflow: visible;
+    z-index: 2;
+}
+
+.part {
+    position: absolute;
+    cursor: move;
+    user-select: none;
+}
+
+/* =========================
+   CAPSULE
+========================= */
+
+.capsule {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: 1px solid black;
+
+    clip-path: polygon(
+        50% 0%,
+        95% 70%,
+        95% 100%,
+        5% 100%,
+        5% 70%
+    );
+}
+
+/* =========================
+   PROBE
+========================= */
+
+.probe {
+    width: 35px;
+    height: 35px;
+    background: gold;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+/* =========================
+   FUEL TANK
+========================= */
+
+.tank {
+    width: 50px;
+    height: 80px;
+    background: linear-gradient(
+        to right,
+        #888,
+        white,
+        #888
+    );
+    border: 1px solid black;
+}
+
+/* =========================
+   SMALL ENGINE
+========================= */
+
+.smallengine {
+    width: 40px;
+    height: 25px;
+    background: #555;
+
+    clip-path: polygon(
+        15% 0%,
+        85% 0%,
+        70% 100%,
+        30% 100%
+    );
+}
+
+/* =========================
+   BIG ENGINE
+========================= */
+
+.bigengine {
+    width: 60px;
+    height: 35px;
+    background: #444;
+
+    clip-path: polygon(
+        0% 0%,
+        100% 0%,
+        80% 100%,
+        20% 100%
+    );
+}
+
+/* =========================
+   FAIRING
+========================= */
+
+.fairing {
+    width: 60px;
+    height: 70px;
+    background: white;
+    border: 1px solid black;
+    border-radius: 50px 50px 0 0;
+}
+
+/* =========================
+   BOOSTER
+========================= */
+
+.booster {
+    width: 45px;
+    height: 100px;
+    background: linear-gradient(
+        to right,
+        #555,
+        #ddd,
+        #555
+    );
+    border: 2px solid #333;
+    border-radius: 5px;
+}
+
+/* =========================
+   SOLAR PANEL
+========================= */
+
+.panel {
+    width: 90px;
+    height: 35px;
+    background: repeating-linear-gradient(
+        90deg,
+        #063b83,
+        #063b83 10px,
+        #4da6ff 11px,
+        #4da6ff 13px
+    );
+    border: 2px solid #222;
+}
+
+/* =========================
+   DECOUPLER
+========================= */
+
+.decoupler {
+    width: 55px;
+    height: 12px;
+    background: #999;
+    border: 2px solid #333;
+}
+
+/* =========================
+   DOCKING PORT
+========================= */
+
+.docking {
+    width: 35px;
+    height: 15px;
+    background: silver;
+    border: 2px solid #333;
+    border-radius: 5px;
+}
+
+/* =========================
+   LAUNCHPAD
+========================= */
+
+#launchpad {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35px;
+    background: linear-gradient(
+        to bottom,
+        #555,
+        #222
+    );
+    border-top: 4px solid #999;
+    z-index: 1;
+}
+
+/* =========================
+   GROUND
+========================= */
+
+#ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(
+        to bottom,
+        #4c9c38,
+        #24651e
+    );
+    z-index: 0;
+}
+
+/* =========================
+   ENGINE FIRE
+========================= */
+
+.fire {
+    position: absolute;
+    bottom: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35px;
+    height: 55px;
+    background: linear-gradient(
+        to bottom,
+        yellow,
+        orange,
+        red,
+        transparent
+    );
+    border-radius: 50%;
+    animation: flame 0.15s infinite alternate;
+}
+
+@keyframes flame {
+    from {
+        height: 40px;
+        opacity: 0.7;
+    }
+
+    to {
+        height: 60px;
+        opacity: 1;
+    }
+}
+
+/* =========================
+   FLIGHT DATA
+========================= */
+
+#velocity,
+#altitude,
+#apoapsis,
+#periapsis,
+#fuel,
+#science,
+#money {
+    font-weight: bold;
+    color: white;
+}
+
+#warpDisplay {
+    color: white;
+    font-weight: bold;
+}
+
+/* =========================
+   SCIENCE PANEL
+========================= */
+
+#sciencePanel {
+    position: absolute;
+    right: 10px;
+    top: 70px;
+    width: 200px;
+    padding: 10px;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+    z-index: 10;
+}
+
+#sciencePanel h3 {
+    margin-top: 0;
+}
+
+/* =========================
+   CAREER PANEL
+========================= */
+
+#careerPanel {
+    position: absolute;
+    right: 10px;
+    top: 300px;
+    width: 200px;
+    padding: 10px;
+    background: rgba(0,0,0,0.75);
+    color: white;
+    border: 2px solid gold;
+    border-radius: 8px;
+    z-index: 10;
+}
+
+#careerPanel h3 {
+    margin-top: 0;
+}
+
+/* =========================
+   TECH TREE
+========================= */
+
+#techTreePanel {
+    position: absolute;
+    left: 10px;
+    bottom: 100px;
+    width: 220px;
+    padding: 10px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    border: 2px solid #00aaff;
+    border-radius: 8px;
+    z-index: 10;
+}
+
+#techTreePanel h3 {
+    margin-top: 0;
+}
+
+#techTreePanel button {
+    width: 190px;
+}
+
+/* =========================
+   ACHIEVEMENTS
+========================= */
+
+#achievementPanel {
+    position: absolute;
+    right: 10px;
+    bottom: 100px;
+    width: 200px;
+    padding: 10px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    border: 2px solid gold;
+    border-radius: 8px;
+    z-index: 10;
+}
+
+#achievementPanel h3 {
+    margin-top: 0;
+}
+
+#achievementList {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+#achievementList div {
+    padding: 5px;
+    margin: 4px 0;
+    background: #333;
+    border-radius: 5px;
+}
+
+/* =========================
+   ORBIT LINE
+========================= */
+
+#orbitLine {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100px;
+    height: 100px;
+    border: 2px dashed white;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* =========================
+   MAP
+========================= */
+
+#map {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle,
+        #17284b,
+        #02030a
+    );
+    z-index: 100;
+    overflow: hidden;
+}
+
+#map h2 {
+    color: white;
+}
+
+#map button {
+    position: relative;
+    z-index: 110;
+}
+
+/* SUN */
+
+.sun {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 70px;
+    height: 70px;
+    background: orange;
+    border-radius: 50%;
+    box-shadow: 0 0 40px yellow;
+    transform: translate(-50%, -50%);
+}
+
+/* PLANETS */
+
+.planet {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.mercury {
+    width: 12px;
+    height: 12px;
+    background: gray;
+}
+
+.venus {
+    width: 20px;
+    height: 20px;
+    background: orange;
+}
+
+.earth {
+    width: 24px;
+    height: 24px;
+    background: #1685ff;
+}
+
+.mars {
+    width: 18px;
+    height: 18px;
+    background: #c14425;
+}
+
+/* ORBITS */
+
+.orbit {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.mercuryOrbit {
+    width: 150px;
+    height: 150px;
+}
+
+.venusOrbit {
+    width: 230px;
+    height: 230px;
+}
+
+.earthOrbit {
+    width: 320px;
+    height: 320px;
+}
+
+.marsOrbit {
+    width: 430px;
+    height: 430px;
+}
+
+.moonOrbit {
+    width: 45px;
+    height: 45px;
+}
+
+/* =========================
+   SCROLLBARS
+========================= */
+
+#parts::-webkit-scrollbar,
+#achievementList::-webkit-scrollbar {
+    width: 6px;
+}
+
+#parts::-webkit-scrollbar-thumb,
+#achievementList::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+/* =========================
+   MOBILE RESPONSIVENESS
+========================= */
+
+@media (max-width: 900px) {
+
+    #builder {
+        width: 90%;
+        left: 50%;
+    }
+
+    #parts {
+        position: relative;
+        left: auto;
+        top: auto;
+        width: 95%;
+        margin: 10px auto;
+    }
+
+    #parts button {
+        width: 45%;
+    }
+
+    #sciencePanel,
+    #careerPanel,
+    #techTreePanel,
+    #achievementPanel {
+        position: relative;
+        top: auto;
+        right: auto;
+        left: auto;
+        bottom: auto;
+        width: 95%;
+        margin: 10px auto;
+    }
+
+    #builder {
+        position: relative;
+        top: auto;
+        transform: none;
+        margin: 20px auto;
+    }
+
+    body {
+        overflow-y: auto;
+    }
+}
+
+@media (max-width: 500px) {
+
+    h1 {
+        font-size: 22px;
+    }
+
+    button {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+
+    #builder {
+        height: 350px;
+    }
+
+    #parts button {
+        width: 100%;
+    }
+
+}

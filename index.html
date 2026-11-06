@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spaceflight Simulator Builder</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<h1>Spaceflight Simulator Builder</h1>
+
+<h2 id="planetName">Earth</h2>
+
+<!-- PLANETS -->
+
+<button onclick="goEarth()">Earth</button>
+<button onclick="goMoon()">Moon</button>
+<button onclick="goMars()">Mars</button>
+
+<!-- MAIN CONTROLS -->
+
+<button onclick="openMap()">Map</button>
+<button onclick="launch()">Launch</button>
+<button onclick="stage()">STAGE</button>
+
+<!-- SAVE SYSTEM -->
+
+<button onclick="saveRocket()">
+Save Rocket
+</button>
+
+<button onclick="loadRocket()">
+Load Rocket
+</button>
+
+<button onclick="clearRocket()">
+Clear Rocket
+</button>
+
+<!-- TIME WARP -->
+
+<h3 id="warpDisplay">
+Time Warp ×1
+</h3>
+
+<button onclick="setWarp(1)">×1</button>
+<button onclick="setWarp(2)">×2</button>
+<button onclick="setWarp(5)">×5</button>
+<button onclick="setWarp(10)">×10</button>
+<button onclick="setWarp(50)">×50</button>
+<button onclick="setWarp(100)">×100</button>
+<button onclick="setWarp(1000)">×1000</button>
+
+<!-- FLIGHT DATA -->
+
+<div id="flightData">
+
+Velocity:
+<span id="velocity">0 m/s</span>
+
+<br>
+
+Altitude:
+<span id="altitude">0 m</span>
+
+<br>
+
+Apoapsis:
+<span id="apoapsis">0 m</span>
+
+<br>
+
+Periapsis:
+<span id="periapsis">0 m</span>
+
+</div>
+
+<!-- FUEL -->
+
+<div id="fuelPanel">
+
+Fuel:
+<span id="fuel">100%</span>
+
+</div>
+
+<!-- SCIENCE -->
+
+<div id="sciencePanel">
+
+Science:
+<span id="science">0</span>
+
+<br><br>
+
+<button onclick="probeMission()">
+Probe Mission
+</button>
+
+<button onclick="moonMission()">
+Moon Mission
+</button>
+
+<button onclick="marsMission()">
+Mars Mission
+</button>
+
+</div>
+
+<!-- CAREER -->
+
+<div id="careerPanel">
+
+Money:
+$<span id="money">10000</span>
+
+<br><br>
+
+<button onclick="earthContract()">
+Earth Contract
+</button>
+
+<button onclick="moonContract()">
+Moon Contract
+</button>
+
+<button onclick="marsContract()">
+Mars Contract
+</button>
+
+</div>
+
+<!-- TECH TREE -->
+
+<div id="techTreePanel">
+
+<h3>Tech Tree</h3>
+
+<button onclick="unlockPart('probe',50)">
+Probe Core (50)
+</button>
+
+<button onclick="unlockPart('bigengine',100)">
+Launch Engine (100)
+</button>
+
+<button onclick="unlockPart('fairing',150)">
+Fairing (150)
+</button>
+
+<button onclick="unlockPart('booster',200)">
+Booster (200)
+</button>
+
+<button onclick="unlockPart('panel',250)">
+Solar Panel (250)
+</button>
+
+<button onclick="unlockPart('decoupler',300)">
+Decoupler (300)
+</button>
+
+<button onclick="unlockPart('docking',400)">
+Docking Port (400)
+</button>
+
+</div>
+
+<!-- ACHIEVEMENTS -->
+
+<div id="achievementPanel">
+
+<h3>Achievements</h3>
+
+<div id="achievementList"></div>
+
+<button onclick="firstLaunch()">
+First Launch
+</button>
+
+<button onclick="reachOrbit()">
+Reach Orbit
+</button>
+
+<button onclick="moonLanding()">
+Moon Landing
+</button>
+
+<button onclick="marsLanding()">
+Mars Landing
+</button>
+
+<button onclick="spaceStation()">
+Space Station Builder
+</button>
+
+</div>
+
+<!-- ORBIT -->
+
+<div id="orbitLine"></div>
+
+<button onclick="circularize()">
+Circularize
+</button>
+
+<button onclick="deorbit()">
+Deorbit
+</button>
+
+<!-- PARTS -->
+
+<div id="parts">
+
+<h3>Parts</h3>
+
+<button onclick="createPart('capsule')">
+Capsule
+</button>
+
+<button onclick="createPart('probe')">
+Probe Core
+</button>
+
+<button onclick="createPart('tank')">
+Fuel Tank
+</button>
+
+<button onclick="createPart('smallengine')">
+Efficient Engine
+</button>
+
+<button onclick="createPart('bigengine')">
+Launch Engine
+</button>
+
+<button onclick="createPart('fairing')">
+Fairing
+</button>
+
+<button onclick="createPart('booster')">
+Booster
+</button>
+
+<button onclick="createPart('panel')">
+Solar Panel
+</button>
+
+<button onclick="createPart('decoupler')">
+Decoupler
+</button>
+
+<button onclick="createPart('docking')">
+Docking Port
+</button>
+
+</div>
+
+<!-- BUILDER -->
+
+<div id="builder"></div>
+
+<!-- LAUNCH PAD -->
+
+<div id="launchpad"></div>
+
+<!-- MAP -->
+
+<div id="map">
+
+<h2>Solar System Map</h2>
+
+<div class="sun"></div>
+
+<div class="orbit mercuryOrbit">
+    <div class="mercury"></div>
+</div>
+
+<div class="orbit venusOrbit">
+    <div class="venus"></div>
+</div>
+
+<div class="orbit earthOrbit">
+
+    <div class="earth">
+
+        <div class="moonOrbit">
+            <div class="moon"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="orbit marsOrbit">
+    <div class="mars"></div>
+</div>
+
+<button onclick="closeMap()">
+Close Map
+</button>
+
+</div>
+
+<!-- GROUND -->
+
+<div id="ground"></div>
+
+<!-- JAVASCRIPT FILES -->
+
+<script src="script.js"></script>
+<script src="launch.js"></script>
+<script src="planets.js"></script>
+<script src="map.js"></script>
+<script src="orbit.js"></script>
+<script src="timewarp.js"></script>
+<script src="staging.js"></script>
+<script src="fuel.js"></script>
+<script src="save.js"></script>
+<script src="science.js"></script>
+<script src="career.js"></script>
+<script src="techtree.js"></script>
+<script src="achievements.js"></script>
+
+</body>
+</html>
